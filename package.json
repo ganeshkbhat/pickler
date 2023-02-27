@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ganeshkbhat/jsextenders.git"
+    "url": "git+https://github.com/ganeshkbhat/pickler.git"
   },
   "keywords": [],
   "author": "Ganesh B",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ganeshkbhat/jsextenders/issues"
+    "url": "https://github.com/ganeshkbhat/pickler/issues"
   },
-  "homepage": "https://github.com/ganeshkbhat/jsextenders#readme",
+  "homepage": "https://github.com/ganeshkbhat/pickler#readme",
   "devDependencies": {
     "@types/node": "^18.11.3",
     "chai": "^4.3.6",

@@ -5,5 +5,5 @@ npm module implements the python pickle-like binary protocols for serializing an
 
 ### INDEVELOPMENT - DO NOT INSTALL
 
-The version 0.0.2 will start having the actual usable pickle module
+The version 0.0.3 will start having the actual usable pickle module
 
