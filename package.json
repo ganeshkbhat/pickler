@@ -37,5 +37,7 @@
     "sinon": "^14.0.0",
     "unimported": "^1.22.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "hasher-apis": "^0.2.1"
+  }
 }
