@@ -44,7 +44,7 @@ function pickle() {
     // Unpickler(file).load() => bytes
     function load(file, { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
     // loads(...args) => bytes
-    function loads(data, "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
+    function loads(data, slash = "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
 
     // class pickle.Pickler(file, protocol = None, *, fix_imports = true, buffer_callback = None)
     //     dump(obj)
