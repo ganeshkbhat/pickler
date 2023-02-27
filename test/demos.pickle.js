@@ -1,9 +1,9 @@
 /**
  * 
- * Package: pickler
+ * Package: mod-pickle
  * Author: Ganesh B
  * Description: 
- * Install: npm i pickler --save
+ * Install: npm i mod-pickle --save
  * Github: https://github.com/ganeshkbhat/pickler
  * npmjs Link: https://www.npmjs.com/package/pickler
  * File: test/demos.pickle.js
