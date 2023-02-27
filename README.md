@@ -2,3 +2,8 @@
 npm module implements the python pickle-like binary protocols for serializing and de-serializing a javascript object structure as in python
 
 [Pickle Reference: https://docs.python.org/3/library/pickle.html#module-pickle](https://docs.python.org/3/library/pickle.html#module-pickle)
+
+### INDEVELOPMENT - DO NOT INSTALL
+
+The version 0.0.2 will start having the actual usable pickle module
+
