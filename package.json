@@ -1,0 +1,41 @@
+{
+  "name": "pickler",
+  "version": "0.0.1",
+  "description": "npm module implements the python pickle-like binary protocols for serializing and de-serializing a javascript object structure as in python",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --recursive  --timeout 60000",
+    "testconfig": "mocha --reporter spec --recursive --config ./mocha.test.config.js --experimental-loader=./loader.mjs --timeout 60000"
+  },
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganeshkbhat/jsextenders.git"
+  },
+  "keywords": [],
+  "author": "Ganesh B",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ganeshkbhat/jsextenders/issues"
+  },
+  "homepage": "https://github.com/ganeshkbhat/jsextenders#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.3",
+    "chai": "^4.3.6",
+    "hpp": "^0.2.3",
+    "loadtest": "^5.2.0",
+    "mocha": "^10.0.0",
+    "nsp": "^2.8.1",
+    "nsp-api": "^1.0.3",
+    "safe-regex": "^2.1.1",
+    "sinon": "^14.0.0",
+    "unimported": "^1.22.0"
+  },
+  "dependencies": {}
+}
