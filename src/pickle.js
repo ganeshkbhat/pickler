@@ -61,7 +61,7 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
     const ALGORITHM = algorithm || "aes-256-ctr";
     const KEYALGORITHM = keyAlgorithm || "sha256";
     const DIGEST = digest || "base64";
-    const OPTIONS = options || { logger: console.log };
+    const OPTIONS = options || { logger: console.log, useextension: true };
 
     function dump(path, data, salt = "secret") {
         if (typeof data === "object") {
@@ -71,15 +71,15 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
             // data = data.toString();
             data = new Buffer(data);
         }
-        return hash.fileHashFromContent(path, data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+        return hash.fileHashFromContent(path + (!!options.useextension) ? ".jspkl" : "", data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     function load(path, salt = "secret") {
-        return hash.fileDeHashLoadContent(path, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+        return hash.fileDeHashLoadContent(path + (!!options.useextension) ? ".jspkl" : "", salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     function unpickle(path, salt = "secret") {
-        return hash.fileDeHashContent(path, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+        return hash.fileDeHashContent(path + (!!options.useextension) ? ".jspkl" : "", salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     return {
