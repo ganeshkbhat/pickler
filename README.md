@@ -9,13 +9,13 @@ Find the demos in the [demos folder](./demos)
 
 
 
-- [JSAlgorithmBasedPickler, jsPickler](#jsPickler)
+- [JSAlgorithmBasedPickler, jsPickler](#jspickler)
 - [pickle, pypickle](#pypickle) [<sub>INDEVELOPMENT</sub>]
-- [JSCertificateBasedPickler, jsCertPickler](#jsCertPickler) [<sub>INDEVELOPMENT</sub>]
+- [JSCertificateBasedPickler, jsCertPickler](#jscertpickler) [<sub>INDEVELOPMENT</sub>]
 
 
 
-### <a name="jsPickler"></a>JSAlgorithmBasedPickler, jsPickler
+### <a name="jspickler"></a>JSAlgorithmBasedPickler, jsPickler
 
 `JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options)`
 
@@ -34,12 +34,12 @@ Find the demos in the [demos folder](./demos)
  */
 ```
 
-- [.dump](#JSPicklerdump)
-- [.load](#JSPicklerload)
-- [.unpickle](#JSPicklerunpickle)
+- [.dump](#jspicklerdump)
+- [.load](#jspicklerload)
+- [.unpickle](#jspicklerunpickle)
 
 
-#### <a name="JSPicklerdump"></a>.dump
+#### <a name="jspicklerdump"></a>.dump
 
 `dump(path, data, salt = "secret")`
 
@@ -48,7 +48,7 @@ Find the demos in the [demos folder](./demos)
 
 ```
 
-#### <a name="JSPicklerload"></a>.load
+#### <a name="jspicklerload"></a>.load
 
 `load(path, salt = "secret")`
 
@@ -57,7 +57,7 @@ Find the demos in the [demos folder](./demos)
 
 ```
 
-#### <a name="JSPicklerunpickle"></a>.unpickle
+#### <a name="jspicklerunpickle"></a>.unpickle
 
 `unpickle(path, salt = "secret")`
 
@@ -72,7 +72,7 @@ Find the demos in the [demos folder](./demos)
 
 
 
-### <a name="jsCertPickler"></a>JSCertificateBasedPickler, jsCertPickler [INDEVELOPMENT]
+### <a name="jscertpickler"></a>JSCertificateBasedPickler, jsCertPickler [INDEVELOPMENT]
 
 
 
