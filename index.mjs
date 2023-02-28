@@ -19,11 +19,15 @@
 
 import {
     default as pickler,
-    pickle
+    // pickle, pypickle, 
+    JSAlgorithmBasedPickler, jsPickler,
+    // JSCertificateBasedPickler, jsCertPickler
 } from "./index.js";
 
 export default pickler;
 
 export {
-    pickle
+    // pickle, pypickle, 
+    JSAlgorithmBasedPickler, jsPickler,
+    // JSCertificateBasedPickler, jsCertPickler
 };

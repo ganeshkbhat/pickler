@@ -16,11 +16,22 @@
 
 'use strict';
 
-var pickle = require("./src/pickle");
+var { pickle, pypickle, JSAlgorithmBasedPickler, jsPickler, JSCertificateBasedPickler, jsCertPickler } = require("./src/pickle");
 
-module.exports.pickle = pickle;
+
+// module.exports.pickle = pickle;
+// module.exports.pypickle = pypickle;
+
+module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
+module.exports.jsPickler = jsPickler;
+
+// module.exports.JSCertificateBasedPickler = JSCertificateBasedPickler;
+// module.exports.jsCertPickler = jsCertPickler;
+
 
 module.exports.default = {
-    pickle
+    // pickle, pypickle, 
+    JSAlgorithmBasedPickler, jsPickler,
+    // JSCertificateBasedPickler, jsCertPickler
 }
 

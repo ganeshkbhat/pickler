@@ -151,3 +151,8 @@ function pickle() {
 module.exports.pickle = pickle;
 module.exports.pypickle = pickle;
 
+module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
+module.exports.jsPickler = JSAlgorithmBasedPickler;
+
+module.exports.JSCertificateBasedPickler = JSCertificateBasedPickler;
+module.exports.jsCertPickler = JSCertificateBasedPickler;
