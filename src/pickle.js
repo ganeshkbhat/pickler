@@ -49,10 +49,10 @@ function JSCertificateBasedPickler() {
 
 function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
 
-    var ALGORITHM = algorithm || "aes-256-ctr";
-    var KEYALGORITHM = keyAlgorithm || "sha256";
-    var DIGEST = digest || "base64";
-    var OPTIONS = options || { logger: console.log };
+    const ALGORITHM = algorithm || "aes-256-ctr";
+    const KEYALGORITHM = keyAlgorithm || "sha256";
+    const DIGEST = digest || "base64";
+    const OPTIONS = options || { logger: console.log };
 
     function dump(path, data, salt = "secret") {
         if (typeof data === "object") {
