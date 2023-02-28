@@ -17,6 +17,7 @@
 'use strict';
 
 const hash = require("hasher-apis");
+const path = require("path");
 const fs = require("fs");
 
 
@@ -54,7 +55,7 @@ function JSCertificateBasedPickler() {
  * @param {*} keyAlgorithm
  * @param {*} digest
  * @param {*} options
- * @return {*} 
+ * @return { < { ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS, dump: <function>, load: <function>, unpickle: <function> } > } { ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS, dump, load, unpickle }
  */
 function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
 
@@ -63,7 +64,16 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
     const DIGEST = digest || "base64";
     const OPTIONS = options || { logger: console.log, useextension: true };
 
-    function dump(path, data, salt = "secret") {
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {*} data
+     * @param {string} [salt="secret"]
+     * @return {*} 
+     */
+    function dump(filepath, data, salt = "secret") {
+        let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
         if (typeof data === "object") {
             // data = JSON.stringify(data);
             data = new Buffer(data);
@@ -71,15 +81,31 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
             // data = data.toString();
             data = new Buffer(data);
         }
-        return hash.fileHashFromContent(path + (!!options.useextension) ? ".jspkl" : "", data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+        return hash.fileHashFromContent(path.join(filepath + ext), data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
-    function load(path, salt = "secret") {
-        return hash.fileDeHashLoadContent(path + (!!options.useextension) ? ".jspkl" : "", salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {string} [salt="secret"]
+     * @return {*} 
+     */
+    function load(filepath, salt = "secret") {
+        let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
+        return hash.fileDeHashLoadContent(path.join(filepath + ext), salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
-    function unpickle(path, salt = "secret") {
-        return hash.fileDeHashContent(path + (!!options.useextension) ? ".jspkl" : "", salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {string} [salt="secret"]
+     * @return {*} 
+     */
+    function unpickle(filepath, salt = "secret") {
+        let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
+        return hash.fileDeHashContent(path.join(filepath + ext), salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     return {

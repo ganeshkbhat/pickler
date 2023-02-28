@@ -17,6 +17,24 @@
 'use strict';
 
 
-const hash = require("hasher-apis");
+const JSPickle = require("../index.js");
 const fs = require("fs");
+
+const salt = "foobar";
+
+let content = `This is a file containing a collection of programming languages.
+1. C
+2. C++
+3. Java
+
+This is a file containing a collection of interpreted programming languages.
+1. Python
+2. Nodejs
+3. Ruby
+
+`;
+
+let hasher = JSPickle.jsPickler();
+let written = hasher.dump("./demos/test", content);
+console.log(written);
 
