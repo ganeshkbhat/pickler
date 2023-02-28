@@ -38,6 +38,6 @@
     "unimported": "^1.22.0"
   },
   "dependencies": {
-    "hasher-apis": "^0.2.1"
+    "hasher-apis": "^0.2.2"
   }
 }

@@ -16,6 +16,71 @@
 
 'use strict';
 
+const hash = require("hasher-apis");
+const fs = require("fs");
+
+
+function JSCertificateBasedPickler() {
+
+    function dump(path, data, salt = "secret", publicKey) {
+        if (typeof data === "object") {
+            data = JSON.stringify(data);
+        } else {
+            data = data.toString();
+        }
+        return
+    }
+
+    function load(path, salt = "secret", privateKey) {
+        return
+    }
+
+    function unpickle(path, salt = "secret", privateKey) {
+        return
+    }
+
+    return {
+        dump,
+        load,
+        unpickle
+    }
+}
+
+
+function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
+
+    var ALGORITHM = algorithm || "aes-256-ctr";
+    var KEYALGORITHM = keyAlgorithm || "sha256";
+    var DIGEST = digest || "base64";
+    var OPTIONS = options || { logger: console.log };
+
+    function dump(path, data, salt = "secret") {
+        if (typeof data === "object") {
+            data = JSON.stringify(data);
+        } else {
+            data = data.toString();
+        }
+        return
+    }
+
+    function load(path, salt = "secret") {
+        return
+    }
+
+    function unpickle(path, salt = "secret") {
+        return
+    }
+
+    return {
+        ALGORITHM: (() => ALGORITHM)(),
+        KEYALGORITHM: (() => KEYALGORITHM)(),
+        DIGEST: (() => DIGEST)(),
+        OPTIONS: (() => OPTIONS)(),
+        dump,
+        load,
+        unpickle
+    }
+}
 
 /**
  * TODO 
@@ -82,3 +147,5 @@ function pickle() {
 }
 
 module.exports.pickle = pickle;
+module.exports.pypickle = pickle;
+
