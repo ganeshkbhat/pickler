@@ -42,13 +42,14 @@ function JSCertificateBasedPickler(keys, options) {
     const OPTIONS = { logger: console.log, useextension: true, ...options };
 
     if (!!keys.generateKeys) {
-        var { publicKey, privateKey } = hash._genKeyPair(ENCRYPTTYPE, KEYOPTIONS);
+        var { publicKey, privateKey } = hash._genKeyPair(KEYGENTYPE, KEYOPTIONS);
 
-        keys["publicKeyPath"] = path.join(keys.path || "./publicKey");
-        keys["privateKeyPath"] = path.join(keys.path || "./privateKey");
+        keys["publicKeyPath"] = path.join(keys.publicKeyPath || "./publicKey");
+        keys["privateKeyPath"] = path.join(keys.privateKeyPath || "./privateKey");
+        console.log(publicKey, privateKey, publicKey.toString());
 
         try {
-            fs.writeFileSync(key.publicKeyPath, publicKey);
+            fs.writeFileSync(keys.publicKeyPath, publicKey);
         } catch (e) {
             throw new Error(e.toString());
         }
