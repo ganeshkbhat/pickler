@@ -36,5 +36,10 @@ This is a file containing a collection of interpreted programming languages.
 
 let hasher = JSPickle.jsPickler();
 let written = hasher.dump("./demos/test", content);
-console.log(written);
+console.log("[JSPickle]: written", written);
 
+let read = hasher.load("./demos/test");
+console.log("[JSPickle]: read", read);
+
+let dehashed = hasher.unpickle("./demos/test");
+console.log("[JSPickle]: dehashed", dehashed);

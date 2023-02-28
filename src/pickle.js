@@ -20,27 +20,102 @@ const hash = require("hasher-apis");
 const path = require("path");
 const fs = require("fs");
 
+/**
+ *
+ *
+ * @param {*} keys
+ * @param {*} options
+ * @return { < { ALGORITHM, KEYALGORITHM, BASE, KEYGENTYPE, KEYOPTIONS, KOPTIONS, DIGEST, ENCRYPTTYPE, OPTIONS, PUBLICKEYPATH: <function>, PRIVATEKEYPATH: <function>, dump: <function>, load: <function>, unpickle: <function> } > }
+ * { < { ALGORITHM, KEYALGORITHM, BASE, KEYGENTYPE, KEYOPTIONS, KOPTIONS, DIGEST, ENCRYPTTYPE, OPTIONS, PUBLICKEYPATH, PRIVATEKEYPATH, dump, load, unpickle } > } 
+ */
+function JSCertificateBasedPickler(keys, options) {
+    if (!keys) keys = { "generateKeys": true, path: "./" };
 
-function JSCertificateBasedPickler() {
+    const ALGORITHM = keys.algorithm || "sha256";
+    const KEYALGORITHM = keys.keyAlgorithm || "sha256";
+    const BASE = keys.base || "hex";
+    const KEYGENTYPE = keys.keyGenType || "rsa";
+    const KEYOPTIONS = keys.keyOptions || { modulusLength: 2048 };
+    const KOPTIONS = keys.options || { modulusLength: 2048 };
+    const DIGEST = keys.digest || "base64";
+    const ENCRYPTTYPE = keys.encryptType || "createSign";
+    const OPTIONS = { logger: console.log, useextension: true, ...options };
 
-    function dump(path, data, salt = "secret", publicKey) {
-        if (typeof data === "object") {
-            data = JSON.stringify(data);
-        } else {
-            data = data.toString();
+    if (!!keys.generateKeys) {
+        var { publicKey, privateKey } = hash._genKeyPair(ENCRYPTTYPE, KEYOPTIONS);
+
+        keys["publicKeyPath"] = path.join(keys.path || "./publicKey");
+        keys["privateKeyPath"] = path.join(keys.path || "./privateKey");
+
+        try {
+            fs.writeFileSync(key.publicKeyPath, publicKey);
+        } catch (e) {
+            throw new Error(e.toString());
         }
+
+        try {
+            fs.writeFileSync(keys.privateKeyPath, privateKey);
+        } catch (e) {
+            throw new Error(e.toString());
+        }
+    }
+
+    var PUBLICKEYPATH = (!!keys.publicKeyPath) ? keys.publicKeyPath : null;
+    var PRIVATEKEYPATH = (!!keys.privateKeyPath) ? keys.privateKeyPath : null;
+
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {*} data
+     * @param {*} publicKeyPath
+     */
+    function dump(filepath, data, publicKeyPath) {
+        PUBLICKEYPATH = (!!publicKeyPath) ? publicKeyPath : PUBLICKEYPATH;
+        let ext = (!!OPTIONS.useextension) ? ".jscpkl" : "";
+        ext = (!!filepath.includes(".jscpkl")) ? "" : ".jscpkl";
+        data = (typeof data === "object") ? JSON.stringify(data) : data.toString();
         return
     }
 
-    function load(path, salt = "secret", privateKey) {
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {*} privateKeyPath
+     */
+    function load(filepath, privateKeyPath) {
+        PRIVATEKEYPATH = (!!privateKeyPath) ? privateKeyPath : PRIVATEKEYPATH;
+        let ext = (!!OPTIONS.useextension) ? ".jscpkl" : "";
+        ext = (!!filepath.includes(".jscpkl")) ? "" : ".jscpkl";
         return
     }
 
-    function unpickle(path, salt = "secret", privateKey) {
+    /**
+     *
+     *
+     * @param {*} filepath
+     * @param {*} privateKeyPath
+     */
+    function unpickle(filepath, privateKeyPath) {
+        PRIVATEKEYPATH = (!!privateKeyPath) ? privateKeyPath : PRIVATEKEYPATH;
+        let ext = (!!OPTIONS.useextension) ? ".jscpkl" : "";
+        ext = (!!filepath.includes(".jscpkl")) ? "" : ".jscpkl";
         return
     }
 
     return {
+        ALGORITHM: (() => ALGORITHM)(),
+        KEYALGORITHM: (() => KEYALGORITHM)(),
+        BASE: (() => BASE)(),
+        KEYGENTYPE: (() => KEYGENTYPE)(),
+        KEYOPTIONS: (() => KEYOPTIONS)(),
+        KOPTIONS: (() => KOPTIONS)(),
+        DIGEST: (() => DIGEST)(),
+        ENCRYPTTYPE: (() => ENCRYPTTYPE)(),
+        OPTIONS: (() => OPTIONS)(),
+        PUBLICKEYPATH: () => PUBLICKEYPATH,
+        PRIVATEKEYPATH: () => PRIVATEKEYPATH,
         dump,
         load,
         unpickle
@@ -74,13 +149,8 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
      */
     function dump(filepath, data, salt = "secret") {
         let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
-        if (typeof data === "object") {
-            // data = JSON.stringify(data);
-            data = new Buffer(data);
-        } else {
-            // data = data.toString();
-            data = new Buffer(data);
-        }
+        ext = (!!filepath.includes(".jspkl")) ? "" : ".jspkl";
+        data = (typeof data === "object") ? JSON.stringify(data) : data.toString();
         return hash.fileHashFromContent(path.join(filepath + ext), data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
@@ -93,6 +163,7 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
      */
     function load(filepath, salt = "secret") {
         let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
+        ext = (!!filepath.includes(".jspkl")) ? "" : ".jspkl";
         return hash.fileDeHashLoadContent(path.join(filepath + ext), salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
@@ -105,6 +176,7 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
      */
     function unpickle(filepath, salt = "secret") {
         let ext = (!!OPTIONS.useextension) ? ".jspkl" : "";
+        ext = (!!filepath.includes(".jspkl")) ? "" : ".jspkl";
         return hash.fileDeHashContent(path.join(filepath + ext), salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 

@@ -25,13 +25,13 @@ var { pickle, pypickle, JSAlgorithmBasedPickler, jsPickler, JSCertificateBasedPi
 module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
 module.exports.jsPickler = jsPickler;
 
-// module.exports.JSCertificateBasedPickler = JSCertificateBasedPickler;
-// module.exports.jsCertPickler = jsCertPickler;
+module.exports.JSCertificateBasedPickler = JSCertificateBasedPickler;
+module.exports.jsCertPickler = jsCertPickler;
 
 
 module.exports.default = {
     // pickle, pypickle, 
     JSAlgorithmBasedPickler, jsPickler,
-    // JSCertificateBasedPickler, jsCertPickler
+    JSCertificateBasedPickler, jsCertPickler
 }
 

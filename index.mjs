@@ -21,7 +21,7 @@ import {
     default as pickler,
     // pickle, pypickle, 
     JSAlgorithmBasedPickler, jsPickler,
-    // JSCertificateBasedPickler, jsCertPickler
+    JSCertificateBasedPickler, jsCertPickler
 } from "./index.js";
 
 export default pickler;
@@ -29,5 +29,5 @@ export default pickler;
 export {
     // pickle, pypickle, 
     JSAlgorithmBasedPickler, jsPickler,
-    // JSCertificateBasedPickler, jsCertPickler
+    JSCertificateBasedPickler, jsCertPickler
 };
