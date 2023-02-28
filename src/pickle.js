@@ -136,8 +136,8 @@ function pickle() {
     function PickleBuffer() { }
 
     return {
-        HIGHEST_PROTOCOL: () => this.HIGHEST_PROTOCOL,
-        DEFAULT_PROTOCOL: () => this.DEFAULT_PROTOCOL,
+        HIGHEST_PROTOCOL: (() => HIGHEST_PROTOCOL)(),
+        DEFAULT_PROTOCOL: (() => DEFAULT_PROTOCOL)(),
         dump,
         dumps,
         load,
