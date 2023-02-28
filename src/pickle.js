@@ -47,6 +47,15 @@ function JSCertificateBasedPickler() {
 }
 
 
+/**
+ * JSAlgorithmBasedPickler, JSPickler
+ *
+ * @param {*} algorithm
+ * @param {*} keyAlgorithm
+ * @param {*} digest
+ * @param {*} options
+ * @return {*} 
+ */
 function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
 
     const ALGORITHM = algorithm || "aes-256-ctr";
