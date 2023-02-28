@@ -12,10 +12,6 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 - [JSAlgorithmBasedPickler, jsPickler](#jspickler)
 - [pickle, pypickle](#pypickle) [<sub>INDEVELOPMENT</sub>]
 - [JSCertificateBasedPickler, jsCertPickler](#jscertpickler) [<sub>INDEVELOPMENT</sub>]
-- [demos folder](#demos)
-- [.todo](#todo)
-- [LICENSE](#license)
-
 
 
 
