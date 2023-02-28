@@ -6,7 +6,7 @@
  * Install: npm i mod-pickle --save
  * Github: https://github.com/ganeshkbhat/pickler
  * npmjs Link: https://www.npmjs.com/package/pickler
- * File: demos/demos.pickle.js
+ * File: demos/demos.jscertificate.pickle.js
  * File Description: 
  * 
  * 

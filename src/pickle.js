@@ -56,19 +56,21 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
 
     function dump(path, data, salt = "secret") {
         if (typeof data === "object") {
-            data = JSON.stringify(data);
+            // data = JSON.stringify(data);
+            data = new Buffer(data);
         } else {
-            data = data.toString();
+            // data = data.toString();
+            data = new Buffer(data);
         }
-        return
+        return hash.fileHashFromContent(path, data, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     function load(path, salt = "secret") {
-        return
+        return hash.fileDeHashLoadContent(path, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     function unpickle(path, salt = "secret") {
-        return
+        return hash.fileDeHashContent(path, salt, ALGORITHM, KEYALGORITHM, DIGEST, OPTIONS);
     }
 
     return {
