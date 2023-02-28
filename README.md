@@ -2,7 +2,7 @@
 
 npm mod-pickle module implements the python pickle-like binary protocols for serializing and de-serializing a javascript object structure as in python
 
-Find the demos in the [demos folder](./demos)
+Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 
 [Pickle Reference: https://docs.python.org/3/library/pickle.html#module-pickle](https://docs.python.org/3/library/pickle.html#module-pickle)
@@ -12,6 +12,10 @@ Find the demos in the [demos folder](./demos)
 - [JSAlgorithmBasedPickler, jsPickler](#jspickler)
 - [pickle, pypickle](#pypickle) [<sub>INDEVELOPMENT</sub>]
 - [JSCertificateBasedPickler, jsCertPickler](#jscertpickler) [<sub>INDEVELOPMENT</sub>]
+- [demos folder](#demos)
+- [.todo](#todo)
+- [LICENSE](#license)
+
 
 
 
@@ -80,13 +84,13 @@ Find the demos in the [demos folder](./demos)
 
 - In development for pickle, pypickle, JSCertificateBasedPickler, jsCertPickler
 
-# Todo
+# <a name="todo"></a>Todo
 
 Check [.todo](./.todo) file for latest TODO list
 
 <!-- # References -->
 
-# License
+# <a name="license"></a>License
 
 The MIT License (MIT) - See [LICENSE](./LICENSE) for further details
 
