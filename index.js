@@ -19,8 +19,8 @@
 var { pickle, pypickle, JSAlgorithmBasedPickler, jsPickler, JSCertificateBasedPickler, jsCertPickler } = require("./src/pickle");
 
 
-// module.exports.pickle = pickle;
-// module.exports.pypickle = pypickle;
+module.exports.pickle = pickle;
+module.exports.pypickle = pypickle;
 
 module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
 module.exports.jsPickler = jsPickler;
@@ -30,7 +30,7 @@ module.exports.jsCertPickler = jsCertPickler;
 
 
 module.exports.default = {
-    // pickle, pypickle, 
+    pickle, pypickle, 
     JSAlgorithmBasedPickler, jsPickler,
     JSCertificateBasedPickler, jsCertPickler
 }

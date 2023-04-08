@@ -68,12 +68,26 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 
 
-### <a name="pypickle"></a>pickle, pypickle [INDEVELOPMENT]
+### <a name="pypickle"></a>pickle, pypickle
 
+```
+
+'use strict';
+
+const JSPickle = require("../index.js");
+
+let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pickle();
+// let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pypickle();
+
+dump("Testing pickle file", "test.pkl", "None", "True", "None").then(v => console.log(v));
+Pickler("Testing pickle file", "test.pkl", "None", "True", "None").then(v => console.log(v));
+Unpickler("test.pkl", "True", "ASCII", "strict", "None").then(v => console.log(v));
+load("test.pkl", "True", "ASCII", "strict", "None").then(v => console.log(v));
+
+```
 
 
 ### <a name="jscertpickler"></a>JSCertificateBasedPickler, jsCertPickler [INDEVELOPMENT]
-
 
 
 # Current Status

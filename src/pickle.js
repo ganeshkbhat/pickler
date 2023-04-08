@@ -20,6 +20,7 @@ const hash = require("hasher-apis");
 const path = require("path");
 const fs = require("fs");
 
+
 /**
  *
  *
@@ -255,6 +256,111 @@ function pickle() {
         PickleBuffer
     }
 }
+
+
+function pickle() {
+    const threadAsync = require("./thread");
+
+
+    async function run(script, options = {}) {
+        let command = "-c " + script;
+        return threadAsync(command, options);
+    }
+
+    // The pickle module defines three exceptions:
+    //     exception pickle.PickleError
+    //     exception pickle.PicklingError
+    //     exception pickle.UnpicklingError
+    //     Other exception errors: AttributeError, EOFError, ImportError, and IndexError.
+
+    var fs = require("fs");
+
+    var HIGHEST_PROTOCOL;
+    var DEFAULT_PROTOCOL;
+
+    /**
+     * Process Args for command line parsing
+     *
+     * @param {*} argv
+     * @return {*} 
+     */
+    function processArgs(argv) {
+        let args = process.argv.slice(3, process.argv.length);
+        let data = args.filter(v => v.includes("--data="))[0]?.split("=")[1];
+        let filename = args.filter(v => v.includes("--filename="))[0]?.split("=")[1];
+        let option = args.filter(v => v.includes("--options="))[0]?.split("=")[1] || 'wb';
+        let encoding = args.filter(v => v.includes("--encoding="))[0]?.split("=")[1] || 'latin1';
+        let protocol = args.filter(v => v.includes("--protocol="))[0]?.split("=")[1] || 'None';
+        return { data, filename, option, encoding, args };
+    }
+
+    // Equal to Pickler(file, protocol).dump(obj) => file
+    function dump(obj, file, protocol = null, fix_imports = true, buffer_callback) {
+        let fileoption = "wb";
+        protocol = protocol || "None";
+        fix_imports = fix_imports || "True";
+        buffer_callback = buffer_callback || "None";
+        let script = "\"import pickle;file = open('" + file + "', '" + fileoption + "');pickle.dump('" + obj + "', file, protocol=" + protocol + ", fix_imports=" + fix_imports + ", buffer_callback=" + buffer_callback + ");\"";
+        return run(script).catch(err => console.error(err));
+    }
+
+    //  => bytes
+    // function dumps(obj, protocol = None, { }, fix_imports = true, buffer_callback = None) { }
+
+    // Unpickler(file).load() => bytes
+    function load(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
+        let fileoption = "rb";
+        fix_imports = fix_imports || "True";
+        encoding = encoding || "ASCII";
+        errors = errors || "strict";
+        buffers = buffers || "None";
+        let script = "\"import pickle;file = open('" + file + "', '" + fileoption + "');print(pickle.load(file, fix_imports=" + fix_imports + ", encoding='" + encoding + "', errors='" + errors + "', buffers=" + buffers + "));\"";
+        return run(script).catch(err => console.error(err));
+    }
+
+
+    // loads(...args) => bytes
+    // function loads(data, slash = "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
+
+    // class pickle.Pickler(file, protocol = None, *, fix_imports = true, buffer_callback = None)
+    //     dump(obj)
+    //     persistent_id(obj)
+    //     dispatch_table
+    //     reducer_override(obj)
+    //     fast
+
+    async function Pickler(obj, file, protocol = null, fix_imports = true, buffer_callback) {
+        return await dump(obj, file, protocol, fix_imports, buffer_callback);
+    }
+
+    // class pickle.Unpickler(file, *, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None)
+    //     load()
+    //     persistent_load(pid)
+    //     find_class(module, name)
+
+    async function Unpickler(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
+        return await load(file, fix_imports, encoding, errors, buffers);
+    }
+
+    // class pickle.PickleBuffer(buffer)
+    //     raw()
+    //     release()
+
+    function PickleBuffer() { }
+
+    return {
+        HIGHEST_PROTOCOL: (() => HIGHEST_PROTOCOL)(),
+        DEFAULT_PROTOCOL: (() => DEFAULT_PROTOCOL)(),
+        dump,
+        // dumps,
+        load,
+        // loads,
+        Pickler,
+        Unpickler,
+        // PickleBuffer
+    }
+}
+
 
 module.exports.pickle = pickle;
 module.exports.pypickle = pickle;

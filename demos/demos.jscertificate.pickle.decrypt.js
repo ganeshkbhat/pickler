@@ -6,7 +6,7 @@
  * Install: npm i mod-pickle --save
  * Github: https://github.com/ganeshkbhat/pickler
  * npmjs Link: https://www.npmjs.com/package/pickler
- * File: demos/demos.jsalgorithm.pickle.js
+ * File: demos/demos.jscertificate.pickle.js
  * File Description: 
  * 
  * 
@@ -23,6 +23,10 @@ const fs = require("fs");
 
 const salt = "foobar";
 
+const p1 = "./demos/test.jspkl";
+const p2 = "./demos/programming.hashed.txt";
+const p3 = "./demos/test.txt";
+
 let content = `This is a file containing a collection of programming languages.
 1. C
 2. C++
@@ -32,21 +36,10 @@ This is a file containing a collection of interpreted programming languages.
 1. Python
 2. Nodejs
 3. Ruby
-
 `;
 
-let hasher = JSPickle.jsPickler();
-let written = hasher.dump("./demos/test", content);
-console.log("[JSPickle]: written", written);
 
-let read = hasher.load("./demos/test");
-console.log("[JSPickle]: read", read);
-
-// let dehashed = hasher.unpickle("./demos/test");
-// console.log("[JSPickle]: dehashed", dehashed);
-
-console.log(hasher.ALGORITHM)
-console.log(hasher.KEYALGORITHM)
-console.log(hasher.DIGEST)
-console.log(hasher.OPTIONS)
-
+let filename = "./demos/test.jspkl"
+let hashdata = fs.readFileSync(filename, { encoding: "utf-8" });
+let data = hash.decryptWithKey(hashdata, { privateKeyPath: "./demos/privateKeypem"});
+fs.writeFileSync(filename, data, { encoding: "utf-8" });

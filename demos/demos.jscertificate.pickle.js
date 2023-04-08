@@ -46,6 +46,7 @@ console.log("[hasher._fileHash]: File hashed");
 console.log(encrypted);
 
 
+
 // DeHash P3 File hashed content to P3
 let r3 = hash.decrypt(p1, p1, privateKey, "sha256", "rsa", "base64", { modulusLength: 2048 });
 // let r3 = hash.decrypt(p1, p1, privateKey);
