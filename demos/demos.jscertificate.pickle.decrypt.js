@@ -27,19 +27,8 @@ const p1 = "./demos/test.jspkl";
 const p2 = "./demos/programming.hashed.txt";
 const p3 = "./demos/test.txt";
 
-let content = `This is a file containing a collection of programming languages.
-1. C
-2. C++
-3. Java
-
-This is a file containing a collection of interpreted programming languages.
-1. Python
-2. Nodejs
-3. Ruby
-`;
 
 
-let filename = "./demos/test.jspkl"
-let hashdata = fs.readFileSync(filename, { encoding: "utf-8" });
-let data = hash.decryptWithKey(hashdata, { privateKeyPath: "./demos/privateKeypem"});
-fs.writeFileSync(filename, data, { encoding: "utf-8" });
+let content = fs.readFileSync("./demos/programming.encryptwithkey.txt", {encoding: "utf-8"});
+let data = hash.decryptWithKey(content, { privateKeyPath: "./demos/privateKey.pem"});
+fs.writeFileSync("./demos/programming.encryptwithkey.txt", data, { encoding: "utf-8"});

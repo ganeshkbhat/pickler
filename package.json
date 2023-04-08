@@ -1,6 +1,6 @@
 {
   "name": "mod-pickle",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "npm mod-pickle module implements the python pickle-like binary protocols for serializing and de-serializing a javascript object structure as in python",
   "main": "index.js",
   "directories": {
@@ -38,6 +38,7 @@
     "unimported": "^1.22.0"
   },
   "dependencies": {
+    "concurrency.js": "^0.0.3",
     "hasher-apis": "^0.2.7"
   }
 }

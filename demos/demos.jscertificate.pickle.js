@@ -27,16 +27,6 @@ const p1 = "./demos/test.jspkl";
 const p2 = "./demos/programming.hashed.txt";
 const p3 = "./demos/test.txt";
 
-let content = `This is a file containing a collection of programming languages.
-1. C
-2. C++
-3. Java
-
-This is a file containing a collection of interpreted programming languages.
-1. Python
-2. Nodejs
-3. Ruby
-`;
 
 
 // Hash P3 File to P3
@@ -52,24 +42,4 @@ let r3 = hash.decrypt(p1, p1, privateKey, "sha256", "rsa", "base64", { modulusLe
 // let r3 = hash.decrypt(p1, p1, privateKey);
 console.log("[hasher._fileHash]: File dehashed");
 console.log(r3);
-
-
-// let hasher = JSPickle.jsCertPickler();
-// let written = hasher.dump("./demos/test", content);
-// console.log("[JSPickle]: written", written);
-
-// let read = hasher.load("./demos/test");
-// console.log("[JSPickle]: read", read);
-
-// let dehashed = hasher.unpickle("./demos/test");
-// console.log("[JSPickle]: dehashed", dehashed);
-
-// console.log(hasher.ALGORITHM)
-// console.log(hasher.KEYALGORITHM)
-// console.log(hasher.BASE)
-// console.log(hasher.KEYGENTYPE)
-// console.log(hasher.DIGEST)
-// console.log(hasher.KOPTIONS)
-// console.log(hasher.ENCRYPTTYPE)
-// console.log(hasher.OPTIONS)
 
