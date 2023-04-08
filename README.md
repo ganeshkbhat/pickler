@@ -10,9 +10,20 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 
 - [JSAlgorithmBasedPickler, jsPickler](#jspickler)
-- [pickle, pypickle](#pypickle) [<sub>INDEVELOPMENT</sub>]
-- [JSCertificateBasedPickler, jsCertPickler](#jscertpickler) [<sub>INDEVELOPMENT</sub>]
+- [pickle, pypickle](#pypickle)
+- [JSCertificateBasedPickler, jsCertPickler](#jscertpickler)
 
+
+### USAGE:
+
+```
+const JSPickle = require("mod-pickle");
+
+JSPickle.JSAlgorithmBasedPickler
+JSPickle.JSCertificateBasedPickler
+JSPickle.pypickle
+
+```
 
 
 ### <a name="jspickler"></a>JSAlgorithmBasedPickler, jsPickler
@@ -45,6 +56,8 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 ```
 
+let hasher = JSPickle.jsPickler();
+let written = hasher.dump("./demos/test", content);
 
 ```
 
@@ -54,6 +67,9 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 ```
 
+const JSPickle = require("mod-pickle");
+let hasher = JSPickle.jsPickler();
+let read = hasher.load("./demos/test");
 
 ```
 
@@ -63,6 +79,8 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 ```
 
+let hasher = JSPickle.jsPickler();
+let dehashed = hasher.unpickle("./demos/test");
 
 ```
 
@@ -70,29 +88,55 @@ Find the demos in the <a name="demos"></a>[demos folder](./demos)
 
 ### <a name="pypickle"></a>pickle, pypickle
 
+This is the original python pickle implementation.
+
 ```
 
 'use strict';
 
-const JSPickle = require("../index.js");
+const JSPickle = require("mod-pickle");
 
 let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pickle();
 // let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pypickle();
 
 dump(dataObj, file, protocol, fix_imports, buffer_callback).then(v => console.log(v));
 Pickler(dataObj, file, protocol, fix_imports, "buffer_callback).then(v => console.log(v));
+
 Unpickler(file, fix_imports, encoding, errors, buffer).then(v => console.log(v));
 load(file, fix_imports, encoding, errors, buffer).then(v => console.log(v));
 
 ```
 
 
-### <a name="jscertpickler"></a>JSCertificateBasedPickler, jsCertPickler [INDEVELOPMENT]
+### <a name="jscertpickler"></a>JSCertificateBasedPickler, jsCertPickler
 
+
+```
+
+const hash = require("hasher-apis");
+
+let { privateKey, publicKey } = hash._genKeyPair()
+
+hash._dumpKeyFile("./demos/privateKey", privateKey);
+hash._dumpKeyFile("./demos/publicKey", publicKey);
+
+
+const JSPickle = require("mod-pickle");
+const fs = require("fs");
+
+const p3 = "./demos/test.txt";
+let content = fs.readFileSync(p3, {encoding: "utf-8"});
+let hashed = hash.encryptWithKey(content, { publicKeyPath: "./demos/publicKey.pem"});
+
+let data = hash.decryptWithKey(hashed, { privateKeyPath: "./demos/privateKey.pem"});
+fs.writeFileSync("./demos/programming.encryptwithkey.txt", data, { encoding: "utf-8"});
+
+
+```
 
 # Current Status
 
-- In development for pickle, pypickle, JSCertificateBasedPickler, jsCertPickler
+- In development
 
 # <a name="todo"></a>Todo
 
