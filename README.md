@@ -79,10 +79,10 @@ const JSPickle = require("../index.js");
 let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pickle();
 // let { HIGHEST_PROTOCOL, DEFAULT_PROTOCOL, dump, load, Pickler, Unpickler } = JSPickle.pypickle();
 
-dump("Testing pickle file", "test.pkl", "None", "True", "None").then(v => console.log(v));
-Pickler("Testing pickle file", "test.pkl", "None", "True", "None").then(v => console.log(v));
-Unpickler("test.pkl", "True", "ASCII", "strict", "None").then(v => console.log(v));
-load("test.pkl", "True", "ASCII", "strict", "None").then(v => console.log(v));
+dump(dataObj, file, protocol, fix_imports, buffer_callback).then(v => console.log(v));
+Pickler(dataObj, file, protocol, fix_imports, "buffer_callback).then(v => console.log(v));
+Unpickler(file, fix_imports, encoding, errors, buffer).then(v => console.log(v));
+load(file, fix_imports, encoding, errors, buffer).then(v => console.log(v));
 
 ```
 
