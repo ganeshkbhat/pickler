@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "concurrency.js": "^0.0.3",
-    "hasher-apis": "^0.2.7"
+    "hasher-apis": "^0.2.7",
+    "python-wasm": "^0.28.1"
   }
 }
