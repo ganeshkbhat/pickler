@@ -16,11 +16,13 @@
 
 'use strict';
 
-var { pickle, pypickle, JSAlgorithmBasedPickler, jsPickler, JSCertificateBasedPickler, jsCertPickler } = require("./src/pickle");
+var { pickle, JSAlgorithmBasedPickler, jsPickler, JSCertificateBasedPickler, jsCertPickler } = require("./src/pickle");
+const { PyPickle } = require("./src/pypickle");
 
 
 module.exports.pickle = pickle;
-module.exports.pypickle = pypickle;
+module.exports.pypickle = PyPickle;
+module.exports.PyPickle = PyPickle;
 
 module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
 module.exports.jsPickler = jsPickler;
@@ -28,10 +30,10 @@ module.exports.jsPickler = jsPickler;
 module.exports.JSCertificateBasedPickler = JSCertificateBasedPickler;
 module.exports.jsCertPickler = jsCertPickler;
 
-
 module.exports.default = {
-    pickle, pypickle, 
+    pickle, PyPickle,
     JSAlgorithmBasedPickler, jsPickler,
-    JSCertificateBasedPickler, jsCertPickler
+    JSCertificateBasedPickler, jsCertPickler,
+    pypickle: PyPickle
 }
 

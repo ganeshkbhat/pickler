@@ -21,7 +21,6 @@ const path = require("path");
 const fs = require("fs");
 const InterfacePickle = require("./interface");
 
-
 /**
  *
  *
@@ -195,155 +194,63 @@ function JSAlgorithmBasedPickler(algorithm, keyAlgorithm, digest, options) {
 }
 
 
+// function pickle() {
+//     InterfacePickle.call(this, args);
 
-function PyPickle(args) {
-    InterfacePickle.call(this, args);
+//     // The pickle module defines three exceptions:
+//     //     exception pickle.PickleError
+//     //     exception pickle.PicklingError
+//     //     exception pickle.UnpicklingError
+//     //     Other exception errors: AttributeError, EOFError, ImportError, and IndexError.
 
-    this.processArgs = function processArgs(argv) {
-        let args = process.argv.slice(3, process.argv.length);
-        let data = args.filter(v => v.includes("--data="))[0]?.split("=")[1];
-        let filename = args.filter(v => v.includes("--filename="))[0]?.split("=")[1];
-        let option = args.filter(v => v.includes("--options="))[0]?.split("=")[1] || 'wb';
-        let encoding = args.filter(v => v.includes("--encoding="))[0]?.split("=")[1] || 'latin1';
-        let protocol = args.filter(v => v.includes("--protocol="))[0]?.split("=")[1] || 'None';
-        return { data, filename, option, encoding, args };
-    }
+//     var fs = require("fs");
 
-    // loads(...args) => bytes
-    this.loads = function loads(data, slash = "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = null) { }
+//     var HIGHEST_PROTOCOL;
+//     var DEFAULT_PROTOCOL;
 
-    // class pickle.Pickler(file, protocol = None, *, fix_imports = true, buffer_callback = None)
-    //     dump(obj)
-    //     persistent_id(obj)
-    //     dispatch_table
-    //     reducer_override(obj)
-    //     fast
+//     // Equal to Pickler(file, protocol).dump(obj) => file
+//     function dump(obj, file, protocol = None, { }, fix_imports = true, buffer_callback = None) { }
+//     //  => bytes
+//     function dumps(obj, protocol = None, { }, fix_imports = true, buffer_callback = None) { }
+//     // Unpickler(file).load() => bytes
+//     function load(file, { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
+//     // loads(...args) => bytes
+//     function loads(data, slash = "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
 
-    this.dump = function dump(obj, file, protocol = null, fix_imports = true, buffer_callback) {
-        let fileoption = "wb";
-        protocol = protocol || "None";
-        fix_imports = fix_imports || "True";
-        buffer_callback = buffer_callback || "None";
-        let script = "\"import pickle;file = open('" + file + "', '" + fileoption + "');pickle.dump('" + obj + "', file, protocol=" + protocol + ", fix_imports=" + fix_imports + ", buffer_callback=" + buffer_callback + ");\"";
-        return run(script).catch(err => console.error(err));
-    }
+//     // class pickle.Pickler(file, protocol = None, *, fix_imports = true, buffer_callback = None)
+//     //     dump(obj)
+//     //     persistent_id(obj)
+//     //     dispatch_table
+//     //     reducer_override(obj)
+//     //     fast
 
-    this.persistent_id = function persistent_id(obj) { }
+//     function Pickler() { }
 
-    this.dispatch_table = function dispatch_table(obj) { }
+//     // class pickle.Unpickler(file, *, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None)
+//     //     load()
+//     //     persistent_load(pid)
+//     //     find_class(module, name)
 
-    this.reducer_override = function reducer_override(obj) { }
+//     function Unpickler() { }
 
-    this.fast = function fast(obj) { }
+//     // class pickle.PickleBuffer(buffer)
+//     //     raw()
+//     //     release()
 
-    this.Pickler = async function Pickler(obj, file, protocol = null, fix_imports = true, buffer_callback) {
-        return await dump(obj, file, protocol, fix_imports, buffer_callback);
-    }
+//     function PickleBuffer() { }
 
-    // class pickle.Unpickler(file, *, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None)
-    //     load()
-    //     persistent_load(pid)
-    //     find_class(module, name)
-
-    this.load = function load(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) { }
-
-    this.persistent_load = function persistent_load(pid) { }
-
-    this.find_class = function find_class(module, name) { }
-
-    this.Unpickler = async function Unpickler(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
-        return await load(file, fix_imports, encoding, errors, buffers);
-    }
-
-    // class pickle.PickleBuffer(buffer)
-    //     raw()
-    //     release()
-
-    async function PickleBuffer(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
-        return;
-    }
-
-    this.PickleBuffer = PickleBuffer;
-
-    async function raw(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
-        return;
-    }
-
-    this.raw = raw;
-
-    async function release(file, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers) {
-        return;
-    }
-
-    this.release = release;
-
-}
-
-
-/**
- * TODO 
- * REFERENCE:
- * https://docs.python.org/3/library/pickle.html#module-pickle
- * https://github.com/python/cpython/blob/3.11/Lib/pickle.py
- *
- */
-function pickle() {
-    InterfacePickle.call(this, args);
-
-    // The pickle module defines three exceptions:
-    //     exception pickle.PickleError
-    //     exception pickle.PicklingError
-    //     exception pickle.UnpicklingError
-    //     Other exception errors: AttributeError, EOFError, ImportError, and IndexError.
-
-    var fs = require("fs");
-
-    var HIGHEST_PROTOCOL;
-    var DEFAULT_PROTOCOL;
-
-    // Equal to Pickler(file, protocol).dump(obj) => file
-    function dump(obj, file, protocol = None, { }, fix_imports = true, buffer_callback = None) { }
-    //  => bytes
-    function dumps(obj, protocol = None, { }, fix_imports = true, buffer_callback = None) { }
-    // Unpickler(file).load() => bytes
-    function load(file, { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
-    // loads(...args) => bytes
-    function loads(data, slash = "/", { }, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None) { }
-
-    // class pickle.Pickler(file, protocol = None, *, fix_imports = true, buffer_callback = None)
-    //     dump(obj)
-    //     persistent_id(obj)
-    //     dispatch_table
-    //     reducer_override(obj)
-    //     fast
-
-    function Pickler() { }
-
-    // class pickle.Unpickler(file, *, fix_imports = true, encoding = 'ASCII', errors = 'strict', buffers = None)
-    //     load()
-    //     persistent_load(pid)
-    //     find_class(module, name)
-
-    function Unpickler() { }
-
-    // class pickle.PickleBuffer(buffer)
-    //     raw()
-    //     release()
-
-    function PickleBuffer() { }
-
-    return {
-        HIGHEST_PROTOCOL: (() => HIGHEST_PROTOCOL)(),
-        DEFAULT_PROTOCOL: (() => DEFAULT_PROTOCOL)(),
-        dump,
-        dumps,
-        load,
-        loads,
-        Pickler,
-        Unpickler,
-        PickleBuffer
-    }
-}
+//     return {
+//         HIGHEST_PROTOCOL: (() => HIGHEST_PROTOCOL)(),
+//         DEFAULT_PROTOCOL: (() => DEFAULT_PROTOCOL)(),
+//         dump,
+//         dumps,
+//         load,
+//         loads,
+//         Pickler,
+//         Unpickler,
+//         PickleBuffer
+//     }
+// }
 
 
 function pickle() {
@@ -450,7 +357,6 @@ function pickle() {
 
 
 module.exports.pickle = pickle;
-module.exports.PyPickle = PyPickle;
 
 module.exports.JSAlgorithmBasedPickler = JSAlgorithmBasedPickler;
 module.exports.jsPickler = JSAlgorithmBasedPickler;
